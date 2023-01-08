@@ -2,35 +2,41 @@ package com.acs.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity
+@Table(name="salarytbl")
 public class Salary {
+	@Id
 	private int sid;
-	private String name;
-	private String email;
 	private double hra;
 	private double da;
 	private double basic;
+	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate month_year;
 
-	@OneToOne
-	private int eid;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Employee employee;
 
 	public Salary() {
 
 	}
 
-	public Salary(int sid, String name, String email, double hra, double da, double basic, LocalDate month_year,
-			int eid) {
+	public Salary(int sid, double hra, double da, double basic, LocalDate month_year, Employee employee) {
 		super();
 		this.sid = sid;
-		this.name = name;
-		this.email = email;
 		this.hra = hra;
 		this.da = da;
 		this.basic = basic;
 		this.month_year = month_year;
-		this.eid = eid;
+		this.employee = employee;
 	}
 
 	public int getSid() {
@@ -39,22 +45,6 @@ public class Salary {
 
 	public void setSid(int sid) {
 		this.sid = sid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public double getHra() {
@@ -89,12 +79,12 @@ public class Salary {
 		this.month_year = month_year;
 	}
 
-	public int getEid() {
-		return eid;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEid(int eid) {
-		this.eid = eid;
-	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}  
 
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acs.entity.Employee;
 import com.acs.entity.Salary;
 import com.acs.repository.ISalaryRepository;
 
@@ -19,7 +20,7 @@ public class SalaryService {
 		return repo.findAll();
 	}
 
-	public Salary getEmployeeById(int empid) {
+	public Salary getSalaryById(int empid) {
 		Optional<Salary> op = repo.findById(empid);
 		if (op.isPresent())
 			return op.get();
@@ -27,9 +28,15 @@ public class SalaryService {
 			return null;
 	}
 
-	public String createEmployee(Salary sal) {
+	public String createSalary(Salary sal) {
 		repo.save(sal);
 		return "Salary Created With Id:" + sal.getSid();
 	}
 
+	public String updateSalary(Salary sal) {
+		Salary sal1 = getSalaryById(sal.getSid());
+		if (sal1 != null)
+			repo.saveAndFlush(sal);
+		return "Salary Updated";
+	}
 }

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,36 +16,27 @@ public class Employee {
 	@Id
 	private int eid;
 	private String name;
-	private String fname;
-	private int age;
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	@Column(name = "birth_date")
 	private LocalDate dob;
 	private String address;
 	private long phone;
 	private String email;
-	private String education;
 	private String job_post;
-	private long aadhar;
 
 	public Employee() {
 
 	}
 
-	public Employee(int eid, String name, String fname, int age, LocalDate dob, String address, long phone,
-			String email, String education, String job_post, long aadhar) {
-		super();
+	public Employee(int eid, String name, LocalDate dob, String address, long phone, String email, String job_post) {
+		
 		this.eid = eid;
 		this.name = name;
-		this.fname = fname;
-		this.age = age;
 		this.dob = dob;
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
-		this.education = education;
 		this.job_post = job_post;
-		this.aadhar = aadhar;
 	}
 
 	public int getEid() {
@@ -61,22 +53,6 @@ public class Employee {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getFname() {
-		return fname;
-	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public LocalDate getDob() {
@@ -111,28 +87,12 @@ public class Employee {
 		this.email = email;
 	}
 
-	public String getEducation() {
-		return education;
-	}
-
-	public void setEducation(String education) {
-		this.education = education;
-	}
-
 	public String getJob_post() {
 		return job_post;
 	}
 
 	public void setJob_post(String job_post) {
 		this.job_post = job_post;
-	}
-
-	public long getAadhar() {
-		return aadhar;
-	}
-
-	public void setAadhar(long aadhar) {
-		this.aadhar = aadhar;
 	}
 
 }
